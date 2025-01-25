@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Optional/Required Shipping Insurance Documentation</title>
+  <link href="css/stylesheet.css" rel="stylesheet" type="text/css" />
+  <link href="css/sh_style.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
+  <script type="text/javascript" src="js/sh_main.min.js"></script>
+  <script type="text/javascript" src="js/sh_html.min.js"></script>
+  <script type="text/javascript" src="js/sh_php.min.js"></script>
+  <script type="text/javascript" src="js/sh_javascript.min.js"></script>
+  <script type="text/javascript" src="js/sh_sql.min.js"></script>
+  <script type="text/javascript" src="js/sh_css.min.js"></script>
+  <script type="text/javascript" src="js/documentation.js"></script>
+</head>
+<body>
+  <!--[if lt IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative; margin: auto; text-align: center;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://www.theie6countdown.com/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." /></a></div> <![endif]--> 
+  <!--BOF Header-->
+  <div id="headerContainer">
+    <a name="top"></a>
+    <div id="headerWrapper">
+      <div class="contentWrapper">
+        <img src="images/logo.png" alt="Numinix.com" title="Numinix" id="logo" class="headerContent" />
+        <span id="header" class="headerContent forward">Installation Instructions for Optional/Required Shipping Insurance</span>
+        <br class="clearBoth" />
+      </div>
+    </div>
+    <!--BOF Links-->
+    <div class="contentWrapper" id="headerButton">
+      <a href="#install" class="btn install" title="Installation">Installation</a>
+      <a href="#tips" class="btn tips" title="Tips">Tips</a>
+      <a href="#uninstall" class="btn uninstall" title="Uninstall">Uninstall</a>
+      <a href="#help" class="btn help" title="Help">Help</a>
+    </div>
+    <!--EOF Links-->
+  </div>
+  <!--EOF Header-->
+  <div class="contentWrapper">
+    <!--BOF About Us-->
+    <div class="numHeader bodyHeader">
+      <span class="bodyHeaderTxt back">ABOUT US</span>
+      <div class="forward"><a href="#top"><img src="images/backToTop.png" width="115" height="22" alt="backtotop" /></a></div>
+    </div>
+    <div class="bodyWrapper">
+      <div class="spacer">
+        <div class="bodyRow"><span class="bodyStrong">Title:</span><span class="content">Optional/Required Shipping Insurance</span></div>
+        <div class="bodyRow"><span class="bodyStrong">Author:</span><span class="content">Numinix</span></div>
+        <div class="bodyRow"><span class="bodyStrong">Description:</span><span class="content">Adds a an optional or required insurance fee to the order total during checkout.</span></div>
+        <div class="bodyRow"><span class="bodyStrong">Installation Level:</span><span class="content">Easy</span></div>
+        <div class="bodyRow"><span class="bodyStrong">Installation Time:</span><span class="content">~ 5 minutes</span></div>
+        <div class="bodyRow"><span class="bodyStrong">Author Notes:</span><span class="content">Zen Cart is the copyright of the Zen Cart Development Team.</span></div>
+      </div>
+    </div>
+    <!--EOF About Us-->
+    <!--BOF Disclalimer-->
+    <div class="bodyHeaderContainer">
+      <div class="numHeader bodyHeader">
+        <span class="bodyHeaderTxt back">DISCLAIMER</span>
+        <div class="forward"><a href="#top"><img src="images/backToTop.png" width="115" height="22" alt="backtotop" /></a></div>
+      </div>
+      <div class="bodyWrapper">
+        <div class="spacer">
+          This module is installed at your own risk.  If you are unsure of how to complete the installation procedure documented below, please view our help section for additional information.  Numinix Web Development LLC takes no responsibility for problems related to the installation of this module.
+        </div>
+      </div>
+    </div>
+    <!--EOF Disclaimer-->
+    <!--BOF License-->
+    <div class="bodyHeaderContainer">
+      <div class="numHeader bodyHeader">
+        <span class="bodyHeaderTxt back">LICENSE</span>
+        <div class="forward"><a href="#top"><img src="images/backToTop.png" width="115" height="22" alt="backtotop" /></a></div>
+      </div>
+      <div class="bodyWrapper">
+        <div class="spacer">
+          Before installing this module, you agree to abide by these <a href="license.txt" target="_blank">license terms</a>.
+          <br />
+          <div class="centered" id="licenseAgreement">
+            <input type="radio" value="1" name="license" /><label for="license">I agree</label>
+            <input type="radio" value="0" name="license" /><label for="license">I disagree</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--EOF License-->
+    <div id="licenseAgreed">
+      <a name="install"></a>
+      <!--BOF INSTALLATION-->
+      <div class="bodyHeaderContainer">
+        <div class="bodyHeader" id="green">
+          <span class="bodyHeaderTxt back">INSTALLATION</span>
+          <div class="forward"><a href="#top"><img src="images/backToTop.png" width="115" height="22" alt="backtotop" /></a></div>
+        </div>
+
+        <div class="bodyWrapper">
+          <ol>
+            <li>Patch your database by copying and pasting the contents of install.sql into ADMIN-&gt;TOOLS-&gt;INSTALL SQL PATCHES</li>
+            <li>Upload all files to your server, maintaining directory structure</li>
+            <li>Define your shipping zones in Zen Cart prior to installing this module</li>
+            <li>Go to ADMIN->MODULES->ORDER TOTAL->SHIPPING INSURANCE and click INSTALL</li>
+            <li>Configure the module and create table rates for each shipping zone.</li>
+          </ol>
+        </div>
+      </div>
+      <!--EOF INSTALLATION-->
+      <a name="tips"></a>
+      <!--BOF TIPS-->
+      <div class="bodyHeaderContainer">
+        <div class="bodyHeader" id="blue">
+          <span class="bodyHeaderTxt back">TIPS</span>
+          <div class="forward"><a href="#top"><img src="images/backToTop.png" width="115" height="22" alt="backtotop" /></a></div>
+        </div>
+        <div class="bodyWrapper">
+          <p>If you need to add a zone after this module is installed, you will need to save your configuration settings to a text file and reinstall the module through the admin.</p>
+          <ul>
+            <li><strong>Use Table Rates?</strong> Set this to true is you want to define different rates for each of your defined zones. Set to false to use the increment or percentage methods.</li>
+            <li><strong>Alternate Insurance Type</strong>: Set to <em>percent</em> to return insurance rate as a percentage of the order total.  Set to <em>amount</em> to use the increment method below.</li>
+            <li><strong>Insurance Percentage</strong>: If Alternate Insurance Type is set to <em>percent</em>, enter the percentage of the order total to be added for insurance.</li>
+            <li><strong>Insurance Rate</strong>: If Alternate Insurance Type is set to <em>amount</em>, enter the rate to charge per every X amount (defined in the next section) of the order total.</li>
+            <li><strong>Increment Amount</strong>: Charge the Insurance Rate for every Increment Amount in the order total.</li>
+            <li><strong>Amount Exempt From Fee</strong>: If the order total falls below this amount, insurance is not charged or is deemed as included in the shipping rate.</li>
+            <li><strong>Tax Class</strong>: add appropriate tax to the returned insurance rate.</li>
+            <li><strong>No Insurance Fee on Virtual Products</strong>: Set to true to not include insurance if all products in the cart are virtual.</li>
+            <li><strong>No Insurance Fee on Gift Vouchers</strong>: Set to true to not include insurance if all products in the cart are gift vouchers.</li>
+            <li><strong>No Insurance Fee on Free Shipping</strong>: Set to true to not include the prices of items with free shipping in the order total.  The insurance rate returned will be calculated on only products that return a shipping rate.  This will make it so that all virtual and gift vouchers are not calculated as part of the order total.</li>
+            <li><strong>Required Insurance Amount</strong>: If the order total is above this amount, shipping insurance is required and is automatically calculated in the order total without the option to be able to remove it by the customer.</li>
+            <li><strong>Table Rates</strong>: a rate table is created for each Zone you have defined in your admin.  Please follow the example given in the configuration page for instructions on how to use the table rates.</li>
+          </ul>
+        </div>
+      </div>
+      <!--EOF TIPS-->
+      <a name="uninstall"></a>
+      <!--BOF UNINSTALL-->
+      <div class="bodyHeaderContainer">
+        <div class="bodyHeader" id="red">
+          <span class="bodyHeaderTxt back">UNINSTALL</span>
+          <div class="forward"><a href="#top"><img src="images/backToTop.png" width="115" height="22" alt="backtotop" /></a></div>
+        </div>
+        <div class="bodyWrapper">
+          <ol>
+            <li>Delete all uploaded files from your store.</li>
+            <li>Go to ADMIN->MODULES->ORDER TOTAL->SHIPPING INSURANCE and click REMOVE</li>
+          </ol>
+        </div>
+      </div>
+      <!--EOF UNINSTALL-->
+    </div>
+    <a name="help"></a>
+    <!--BOF HELP-->
+    <div class="bodyHeaderContainer">
+      <div class="bodyHeader" id="orange">
+        <span class="bodyHeaderTxt back">HELP</span>
+        <div class="forward"><a href="#top"><img src="images/backToTop.png" width="115" height="22" alt="backtotop" /></a></div>
+      </div>
+      <div class="bodyWrapper">
+        <div class="spacer">
+          <div class="bodyRow"><span class="bodyStrong">Support Thread:</span><span class="content"><a href="http://www.numinix.com/forum/viewtopic.php?f=5&amp;t=23" target="_blank">http://www.numinix.com/forum/viewtopic.php?f=5&amp;t=23</a></span></div>
+          <div class="bodyRow"><span class="bodyStrong">Change Logs:</span><span class="content"><a href="http://www.numinix.com/forum/viewtopic.php?f=5&amp;t=1709" target="_blank">http://www.numinix.com/forum/viewtopic.php?f=5&amp;t=1709</a></span></div>
+          <div class="bodyRow"><span class="bodyStrong">Contact Us:</span><span class="content"><a href="http://www.numinix.com/contact_us" target="_blank">http://www.numinix.com/contact_us</a></span></div>
+        </div>
+      </div>
+    </div>
+    <!--EOF HELP-->
+  </div>
+  <div id="footerContainer" class="bodyHeaderContainer">Copyright &copy; 2006-2011 Numinix Web Development LLC. Web design by Numinix</div>
+</body>
+</html>
