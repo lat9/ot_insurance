@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Optional/Required Shipping Insurance</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="vinos_favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <style>
+.nav-pills-custom .nav-link {
+    color: #aaa;
+    background: #fff;
+    position: relative;
+}
+.nav-pills-custom .nav-link.active {
+    color: #306eff;
+    background: #fff;
+}
+/* Add indicator arrow for the active tab */
+@media (min-width: 992px) {
+    .nav-pills-custom .nav-link::before {
+        content: '';
+        display: block;
+        border-top: 8px solid transparent;
+        border-left: 10px solid #fff;
+        border-bottom: 8px solid transparent;
+        position: absolute;
+        top: 50%;
+        right: -10px;
+        transform: translateY(-50%);
+        opacity: 0;
+    }
+}
+.nav-pills-custom .nav-link.active::before {
+    opacity: 1;
+}
+body {
+    min-height: 100vh;
+    background: radial-gradient(ellipse at center, rgba(240,249,255,1) 0%,rgba(203,235,255,1) 47%,rgba(161,219,255,1) 100%);
+}
+  </style>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+</head>
+<body>
+<section class="py-5 header">
+    <div class="container py-4">
+        <header class="pb-2">
+            <h1 class="display-4 text-center">Optional/Required Shipping Insurance</h1>
+            <ul>
+                <li>Zen Cart download link: <a href="https://www.zen-cart.com/downloads.php?do=file&id=232" target="_blank">https://www.zen-cart.com/downloads.php?do=file&id=232</a></li>
+                <li>Zen Cart support thread: <a href="https://www.zen-cart.com/showthread.php?50167-Optional-Shipping-Insurance-Module-Support-Thread" target="_blank">https://www.zen-cart.com/showthread.php?50167-Optional-Shipping-Insurance-Module-Support-Thread</a></li>
+                <li>GitHub repository: <a href="https://github.com/lat9/ot_insurance" target="_blank">https://github.com/lat9/ot_insurance</a></li>
+            </ul>
+
+            <h3>Prerequisites</h3>
+            <p>This version of the <b><em>Optional/Required Shipping Insurance</em></b> requires:<ol>
+                <li>A working copy of Zen Cart 2.1.0 or later.</li>
+                <li>The site must use a PHP version greater than or equal to PHP 8.0.</li>
+                <li>(optional) A working copy of Edit Orders, v5.0.0 or later.</li>
+             </ol>
+        </header>
+
+        <div class="row">
+            <div class="col-md-3">
+                <!-- Tabs nav -->
+                <div class="nav flex-column nav-pills nav-pills-custom" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link mb-3 p-3 shadow active" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">
+                        <span class="font-weight-bold small text-uppercase">Overview</span></a>
+                    <a class="nav-link mb-3 p-3 shadow" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">
+                        <span class="font-weight-bold small text-uppercase">Installation</span></a>
+                    <a class="nav-link mb-3 p-3 shadow" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">
+                        <span class="font-weight-bold small text-uppercase">Configuring</span></a>
+                    <a class="nav-link mb-3 p-3 shadow" id="v-pills-4-tab" data-toggle="pill" href="#v-pills-4" role="tab" aria-controls="v-pills-4" aria-selected="false">
+                        <span class="font-weight-bold small text-uppercase">Credits and History</span></a>
+                    <a class="nav-link mb-3 p-3 shadow" id="v-pills-5-tab" data-toggle="pill" href="#v-pills-5" role="tab" aria-controls="v-pills-5" aria-selected="false">
+                        <span class="font-weight-bold small text-uppercase">Files</span></a>
+                    <a class="nav-link mb-3 p-3 shadow" id="v-pills-6-tab" data-toggle="pill" href="#v-pills-6" role="tab" aria-controls="v-pills-6" aria-selected="false">
+                        <span class="font-weight-bold small text-uppercase">License</span></a>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <!-- Tabs content -->
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade shadow rounded bg-white show active p-4" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-1-tab">
+                        <h4 class="font-italic mb-4">Overview</h4>
+                        <p>This Zen Cart order-total module enables a site to include an optional (or required) shipping-insurance fee for a customer's order.</p>
+                    </div>
+
+                    <div class="tab-pane fade shadow rounded bg-white p-4" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-2-tab">
+                        <h4 class="font-italic mb-4">Installation</h4>
+                        <p>Follow these steps to install the order-total:</p>
+                        <ol>
+                            <li>Unzip the plugin's zip-file distribution.</li>
+                            <li>Copy the contents for the distribution's <code>includes</code> directory to your site's <code>/includes</code> directory.</b> 
+                            <li>Log into your Zen Cart admin and define your shipping <a href="https://docs.zen-cart.com/user/admin_pages/locations/zones_definitions/" target="_blank">zone definitions</a> prior to installing this module.</li>
+                            <li>Navigate to the admin's <em>Modules :: Order Total</em>; you'll see an order-total named <b>Shipping Insurance</b>. Click on the associated <code>Install</code> button, and configure the order-total.</li>
+                        </ol>
+                         <div class="card mt-3">
+                            <div class="card-header text-center bg-secondary text-white">Uninstalling</div>
+                            <div class="card-body">
+                                <p>To uninstall the order-total:</p>
+                                <ol>
+                                    <li>Log into your Zen Cart admin  and navigate to <b>Modules :: Order Total</b>.</li>
+                                    <li>Locate the entry for <b>Shipping Insurance</b>, click the associated <code>Un-Install</code> button, confirm the removal and you've removed the order-total's processing.</li>
+                                    <li>Remove the two files that you copied when installing the order-total.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade shadow rounded bg-white p-4" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-3-tab">
+                        <h4 class="font-italic mb-4">Configuring</h4>
+                        <p><b>Note:</b> If you need to add a zone after this module is installed, you will need to save your configuration settings to a text file and reinstall the module through the admin.</p>
+                        <p>The following settings are available for the shipping-insurance calculations:</p>
+                        <ol>
+                            <li><b>Enable Insurance Module</b>: Set this to true to enable the insurance module; default <b>false</b>.</li>
+                            <li><b>Sort Order</b>: Sort order of display. Note: Must be higher than the sub-total.</li>
+                            <li><b>Use Table Rates?</b> Set this to true (the default) if you want to define different rates for each of your defined zones. Set to false to use the increment or percentage methods.</li>
+                            <li><b>Alternate Insurance Type</b>: If not using &quot;Table Rates&quot;, set to <em>percent</em> (the default) to return insurance rate as a percentage of the order total.  Set to <em>amount</em> to use the increment method below.</li>
+                            <li><b>Insurance Percentage</b>: If using the percentage-based insurance type, enter the percentage of the order's total to be added for insurance.</li>
+                            <li><b>Insurance Rate</b>: If not using the percentage-based insurance type, enter the rate to charge per every X amount (defined in the next section) of the order total.</li>
+                            <li><b>Increment Amount</b>: Used by non-percentage-based insurance types. Identify the amount-increment for which the Insurance Rate is applied. If, for example, the increment-amount is 100 and the rate is .50, the insurance is calculated as $0.50 for each $100.00 of the total.</li>
+                            <li><b>Amount Exempt From Fee</b>: Used with <code>amount</code> calculations. Set this to the amount of the total that is exempt from the insurance calculations, i.e. set to 100 for all orders under 100 to be exempt, already insured, etc.</li>
+                            <li><b>Tax Class</b>: Use the selected tax-class for the insurance fee.</li>
+                            <li><b>No Insurance Fee on Virtual Products</b>: Set to true (the default) if the price of any virtual product(s) in the order is not to be included in the insurance calculation.</li>
+                            <li><b>No Insurance Fee on Gift Vouchers</b>: Set to true (the default) if the price of any gift voucher(s) in the order is not to be included in the insurance calculation.</li>
+                            <li><b>No Insurance Fee on Free Shipping</b>: Set to true (the default) to not include the prices of items with free shipping in the insurance calculation.  The insurance rate returned will be calculated on only products that return a shipping rate.  This will make it so that all virtual and gift vouchers are not calculated as part of the order total.</li>
+                            <li><b>Required Insurance Amount</b>: If the order total is above this amount, shipping insurance is required and is automatically calculated in the order total without the option to be able to remove it by the customer.</li>
+                            <li><b>Table Rates</b>: A rate table is created for each Zone you have defined in your admin.  Please follow the example given in the configuration page for instructions on how to use the table rates.</li>
+                        </ol>
+                    </div>
+
+                    <div class="tab-pane fade shadow rounded bg-white p-4" id="v-pills-4" role="tabpanel" aria-labelledby="v-pills-4-tab">
+                        <h4 class="font-italic mb-4">Credits and History</h4>
+                        <ul>
+                            <li>v4.0.0, 2025-02-15 (lat9):<ul>
+                                <li>Updated to interoperate with Zen Cart versions 1.5.8 and later, PHP versions 8.0 and later, Edit Orders v5.0.0 and later and One-Page Checkout v2.4.6 and later.</li>
+                            </ul></li>
+                            <li>v3.2.4, 2020-02-19 (jeking):<ul>
+                                <li>Only change is to add the missing language define file from version 3.2.3.</li>
+                            </ul></li>
+                            <li>v3.2.3, 2018-01-18 (chibipaw):<ul>
+                                <li>Updated to work with PHP 7.x, Zen Cart 1.5.5e, and named the package file to something sane.</li>
+                            </ul></li>
+                            <li>v3.2.2, 2013-10-08 (vanhorn_s):<ul>
+                                <li>bug fix for when zone not set. All I did, was download the latest version from the Numinix website. I am uploading it here for others to be able to use.</li>
+                            </ul></li>
+                            <li>v3.2.1, 2012-09-04 (numinix):<ul>
+                                <li>Code optimization and documentation updates.</li>
+                            </ul></li>
+                            <li>v3.1.4, 2012-02-29 (DJMagicCards):<ul>
+                                <li>Works with PHP 5.3 (replaced split with str_replace and explode)</li>
+                            </ul></li>
+                            <li>v3.13, 2008-05-12 (numinix):<ul>
+                                <li>Bugfixes</li>
+                            </ul></li>
+                            <li>v3.10, 2007-12-30 (numinix):<ul>
+                                <li>Added table rates to the admin configuration</li>
+                                <li>Added required insurance option</li>
+                                <li>Displays insurance rate on checkout_payment and checkout (FEC) pages</li>
+                                <li>Integrates with FEC v1.09+</li>
+                            </ul></li>
+                            <li>v3.0, 2007-12-30 (jettrue):<ul>
+                                <li>This update now works with 1.3.8 and has also been tested in 1.3.7. Earlier versions have not been tested, so test well before using on an older zen cart. This uses the newest USPS rates as of 12/30/2007, and is also now programmed to turn itself off if the customer chooses store pickup.</li>
+                            </ul></li>
+                            <li>v2b, 2006-10-29 (jettrue):<ul>
+                                <li>Initial release.</li>
+                            </ul></li>
+                        </ul>
+                    </div>
+
+                    <div class="tab-pane fade shadow rounded bg-white p-4" id="v-pills-5" role="tabpanel" aria-labelledby="v-pills-5-tab">
+                        <h4 class="font-italic mb-4">Files</h4>
+                        <p>The following files are provided in the order-total's distribution zip-file:</p>
+                        <ol>
+                            <li>includes/languages/english/modules/order_total/lang.ot_insurance.php</li>
+                            <li>includes/modules/order_total/ot_insurance.php</li>
+                        </ol>
+                    </div>
+
+                    <div class="tab-pane fade shadow rounded bg-white p-4" id="v-pills-6" role="tabpanel" aria-labelledby="v-pills-6-tab">
+                        <h4 class="font-italic mb-4">License</h4>
+                        <p><b>Optional/Required Shipping Insurance</b> is released under the General Public License (see license.txt). This script is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</p>
+                        <p>Always backup your shop and database before making changes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
