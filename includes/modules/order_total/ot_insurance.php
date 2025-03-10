@@ -2,6 +2,8 @@
 /**
  * Order Total Module
  *
+ * Last updated: v4.0.0 - Vinos de Frutas Tropicales (lat9)
+ *
  * @package - Optional Insurance
  * @copyright Copyright 2007-2008 Numinix Technology http://www.numinix.com
  * @copyright Copyright 2003-2007 Zen Cart Development Team

@@ -1,1 +1,0 @@
-Updated to work with PHP7.x and Zen Cart 1.5.5f
