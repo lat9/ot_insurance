@@ -1,8 +1,11 @@
 #
-#This is an optional SQL patch to create an International Zone.  Install the patch using the INSTALL SQL PATCHES tool in the Zen Cart admin.  Then, delete any countries defined in your other zones and rename the description as appropriate.
+# This is an optional SQL patch to create an International Zone.
 #
-
-INSERT INTO `geo_zones` (`geo_zone_id`, `geo_zone_name`, `geo_zone_description`, `last_modified`, `date_added`) VALUES (20, 'International', 'All Countries/Zones', NULL, '2007-12-30 20:26:59');
+# Install the patch using the INSTALL SQL PATCHES tool in the Zen Cart admin, then disable any countries defined in your other zones and rename the description as appropriate.
+#
+# *** USE WITH CAUTION ***, not supported!
+#
+INSERT INTO `geo_zones` (`geo_zone_id`, `geo_zone_name`, `geo_zone_description`, `last_modified`, `date_added`) VALUES (20, 'International', 'All Countries/Zones', NULL, now());
 
 INSERT INTO `zones_to_geo_zones` (`zone_country_id`, `zone_id`, `geo_zone_id`) VALUES 
 (1, 0, 20),
