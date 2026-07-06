@@ -2,7 +2,7 @@
 /**
  * Order Total Module
  *
- * Last updated: v4.0.0 - Vinos de Frutas Tropicales (lat9)
+ * Last updated: v4.1.0 - Vinos de Frutas Tropicales (lat9)
  *
  * @package - Optional Insurance
  * @copyright Copyright 2007-2008 Numinix Technology http://www.numinix.com
@@ -48,17 +48,19 @@ class ot_insurance
         $this->title = MODULE_ORDER_TOTAL_INSURANCE_TITLE;
         $this->description = MODULE_ORDER_TOTAL_INSURANCE_DESCRIPTION;
 
+        $sort_order = $this->zenConfig('MODULE_ORDER_TOTAL_INSURANCE_SORT_ORDER');
+        if ($sort_order === null) {
+            $this->sort_order = null;
+            return;
+        }
+        $this->sort_order = (int)$sort_order;
+
+        $this->enabled = ($this->zenConfig('MODULE_ORDER_TOTAL_INSURANCE_STATUS') === 'true');
+        $this->credit_class = true;
+
         global $db;
         $geozones = $db->Execute("SELECT * FROM " . TABLE_GEO_ZONES);
         $this->num_zones = $geozones->RecordCount();
-
-        $this->sort_order = defined('MODULE_ORDER_TOTAL_INSURANCE_SORT_ORDER') ? (int)MODULE_ORDER_TOTAL_INSURANCE_SORT_ORDER : null;
-        if ($this->sort_order === null) {
-            return;
-        }
-
-        $this->enabled = (MODULE_ORDER_TOTAL_INSURANCE_STATUS === 'true');
-        $this->credit_class = true;
 
         $this->eoInfo = [
             'installed' => false,
@@ -66,7 +68,7 @@ class ot_insurance
         ];
 
         $this->output = [];
-        $this->tax_class = (int)MODULE_ORDER_TOTAL_INSURANCE_TAX_CLASS;
+        $this->tax_class = (int)$this->zenConfig('MODULE_ORDER_TOTAL_INSURANCE_TAX_CLASS');
 
         global $order;
 
@@ -201,24 +203,24 @@ class ot_insurance
         // what to "not" include when determining whether/not to display/include
         // the order-total.
         //
-        $this->noInsuranceOnFreeShippingProducts = (MODULE_ORDER_TOTAL_INSURANCE_FREE_SHIPPING === 'true');
-        $this->noInsuranceOnVirtualOrders = (MODULE_ORDER_TOTAL_INSURANCE_VIRTUAL === 'true');
-        $this->noInsuranceOnGvOnlyOrders = (MODULE_ORDER_TOTAL_INSURANCE_GV === 'true');
+        $this->noInsuranceOnFreeShippingProducts = ($this->zenConfig('MODULE_ORDER_TOTAL_INSURANCE_FREE_SHIPPING') === 'true');
+        $this->noInsuranceOnVirtualOrders = ($this->zenConfig('MODULE_ORDER_TOTAL_INSURANCE_VIRTUAL') === 'true');
+        $this->noInsuranceOnGvOnlyOrders = ($this->zenConfig('MODULE_ORDER_TOTAL_INSURANCE_GV') === 'true');
 
         // -----
         // Convert various numeric values into their integer/float version for use in calculations.
         //
-        $this->insuranceIncrement = $this->convertToIntOrFloat(MODULE_ORDER_TOTAL_INSURANCE_INCREMENT);
+        $this->insuranceIncrement = $this->convertToIntOrFloat($this->zenConfig('MODULE_ORDER_TOTAL_INSURANCE_INCREMENT'));
         if ($this->insuranceIncrement == 0) {
             $this->insuranceIncrement = 100;
         }
-        $this->insuranceFee = $this->convertToIntOrFloat(MODULE_ORDER_TOTAL_INSURANCE_FEE);
-        $this->insuranceRequiredOver = $this->convertToIntOrFloat(MODULE_ORDER_TOTAL_INSURANCE_REQUIRED);
-        $this->insuranceValueExempt = $this->convertToIntOrFloat(MODULE_ORDER_TOTAL_INSURANCE_OVER);
-        $this->insurancePercentage = $this->convertToIntOrFloat(MODULE_ORDER_TOTAL_INSURANCE_PER) / 100;
+        $this->insuranceFee = $this->convertToIntOrFloat($this->zenConfig('MODULE_ORDER_TOTAL_INSURANCE_FEE'));
+        $this->insuranceRequiredOver = $this->convertToIntOrFloat($this->zenConfig('MODULE_ORDER_TOTAL_INSURANCE_REQUIRED'));
+        $this->insuranceValueExempt = $this->convertToIntOrFloat($this->zenConfig('MODULE_ORDER_TOTAL_INSURANCE_OVER'));
+        $this->insurancePercentage = $this->convertToIntOrFloat($this->zenConfig('MODULE_ORDER_TOTAL_INSURANCE_PER')) / 100;
 
-        $this->calculationType = MODULE_ORDER_TOTAL_INSURANCE_TYPE;
-        if (MODULE_ORDER_TOTAL_INSURANCE_TABLE === 'true') {
+        $this->calculationType = $this->zenConfig('MODULE_ORDER_TOTAL_INSURANCE_TYPE');
+        if ($this->zenConfig('MODULE_ORDER_TOTAL_INSURANCE_TABLE') === 'true') {
             $this->calculationType = 'table';
         }
 
@@ -261,17 +263,17 @@ class ot_insurance
         $delivery_country_id = (int)($order->delivery['country']['id'] ?? 0);
         $delivery_zone_id = ($order->delivery['zone_id'] ?? -1);
         for ($i = 1; $i <= $this->num_zones; $i++) {
-            $insurance_zone = "MODULE_ORDER_TOTAL_INSURANCE_ZONE_$i";
-            if (defined($insurance_zone) && (int)constant($insurance_zone) > 0) {
+            $insurance_zone = (int)$this->zenConfig("MODULE_ORDER_TOTAL_INSURANCE_ZONE_$i");
+            if ($insurance_zone > 0) {
                 $check = $db->Execute(
                     "SELECT zone_id
                        FROM " . TABLE_ZONES_TO_GEO_ZONES . "
-                      WHERE geo_zone_id = " . (int)constant($insurance_zone) . "
+                      WHERE geo_zone_id = " . (int)$insurance_zone . "
                         AND zone_country_id = $delivery_country_id
                       ORDER BY zone_id"
                 );
                 foreach ($check as $next_zone) {
-                    if ($next_zone['zone_id'] < 1 || $next_zone['zone_id'] == $delivery_zone_id) {
+                    if ($next_zone['zone_id'] < 1 || (int)$next_zone['zone_id'] === $delivery_zone_id) {
                         $this->dest_zone = $i;
                         break;
                     }
@@ -279,11 +281,11 @@ class ot_insurance
             }
         }
 
-        if ($this->dest_zone < 1 && defined('MODULE_ORDER_TOTAL_INSURANCE_ZONE_1') && MODULE_ORDER_TOTAL_INSURANCE_ZONE_1 > 0) {
+        if ($this->dest_zone < 1 && $this->zenConfig('MODULE_ORDER_TOTAL_INSURANCE_ZONE_1') > 0) {
             $this->enabled = false;
         }
 
-        if (!defined('MODULE_ORDER_TOTAL_INSURANCE_ZONE_' . $this->dest_zone) || !defined('MODULE_ORDER_TOTAL_INSURANCE_COST_' . $this->dest_zone)) {
+        if ($this->zenConfig('MODULE_ORDER_TOTAL_INSURANCE_ZONE_' . $this->dest_zone) === null || $this->zenConfig('MODULE_ORDER_TOTAL_INSURANCE_COST_' . $this->dest_zone) === null) {
             $this->enabled = false;
         }
     }
@@ -296,8 +298,8 @@ class ot_insurance
     {
         if (isset($_POST['opt_insurance'])) {
             $_SESSION['opt_insurance'] = !empty($_POST['opt_insurance']);
-        } else {
-            $_SESSION['opt_insurance'] ??= $this->eoInfo['installed'];
+        } elseif (IS_ADMIN_FLAG === true) {
+            $_SESSION['opt_insurance'] = $this->eoInfo['installed'];
         }
     }
 
@@ -340,7 +342,7 @@ class ot_insurance
             $this->insurance = $this->insuranceFee * $number_of_increments;
 
         } else {
-            $table = constant('MODULE_ORDER_TOTAL_INSURANCE_COST_' . $this->dest_zone);
+            $table = $this->zenConfig('MODULE_ORDER_TOTAL_INSURANCE_COST_' . $this->dest_zone);
             $table_cost = preg_split('/[:,]/', $table);
             for ($i = 0, $size = count($table_cost); $i < $size; $i += 2) {
                 if (round($this->insurableTotal, 9) <= $table_cost[$i]) {
@@ -424,7 +426,7 @@ class ot_insurance
             "INSERT INTO " . TABLE_CONFIGURATION . "
                 (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added)
              VALUES
-                ('Enable Insurance Module', 'MODULE_ORDER_TOTAL_INSURANCE_STATUS', 'true', 'Do you want to enable this module? To fully turn this off, both this option and the one below should be set to false.', 6, 1, NULL, 'zen_cfg_select_option([\'true\', \'false\'], ', now()),
+                ('Enable Insurance Module', 'MODULE_ORDER_TOTAL_INSURANCE_STATUS', 'false', 'Do you want to enable this module?', 6, 1, NULL, 'zen_cfg_select_option([\'true\', \'false\'], ', now()),
 
                 ('Sort Order', 'MODULE_ORDER_TOTAL_INSURANCE_SORT_ORDER', '299', 'Sort order of display. Note: Must be higher than the sub-total.', 6, 3, NULL, NULL, now()),
 
@@ -481,9 +483,30 @@ class ot_insurance
         global $db;
         $db->Execute(
             "DELETE FROM " . TABLE_CONFIGURATION . "
-              WHERE configuration_key IN ('" . implode("', '", $this->keys()) . "')
-                 OR configuration_key LIKE 'MODULE\_ORDER\_TOTAL\_INSURANCE\_ZONE\_%'
-                 OR configuration_key LIKE 'MODULE\_ORDER\_TOTAL\_INSURANCE\_COST\_%'"
+              WHERE configuration_key IN ('" . implode("', '", $this->keys()) . "')"
         );
+    }
+
+    // -----
+    // Uses, if present, or emulates otherwise the zc300+ "zen_config"
+    // function.
+    //
+    // @since v4.0.1
+    //
+    private function zenConfig(string $key, mixed $default = null): mixed
+    {
+        static $zen_config_present;
+        if (!isset($zen_config_present)) {
+            $zen_config_present = function_exists('zen_config');
+        }
+
+        if ($zen_config_present) {
+            return zen_config($key, $default);
+        }
+
+        if (defined($key)) {
+            return constant($key);
+        }
+        return $default_value;
     }
 }
